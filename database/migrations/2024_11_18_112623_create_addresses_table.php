@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
+            $table->string('road');
+            $table->integer('number');
+            $table->string('cep');
+            $table->string('state');
+            $table->string('complement');
+            $table->integer('employee_id');
             $table->timestamps();
         });
     }
