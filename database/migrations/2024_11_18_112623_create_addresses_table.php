@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('cep');
             $table->string('state');
             $table->string('complement');
-            $table->integer('employee_id');
+            $table->foreignId('employee_id')->constrained();
             $table->timestamps();
         });
     }
