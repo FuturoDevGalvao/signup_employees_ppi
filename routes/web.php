@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Route::get("/teste", function () {
 });
 
 Route::resource('employees', EmployeeController::class);
+
+Route::resource('addresses', AddressController::class);
