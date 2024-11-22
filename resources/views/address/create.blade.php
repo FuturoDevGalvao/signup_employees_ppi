@@ -3,9 +3,9 @@
 
 @section('content')
     <div class="flex flex-col gap-4 w-[30%]">
-        <h1 class="font-bold text-3xl">Criar novo usuário</h1>
+        <h1 class="font-bold text-3xl">Criar novo endereço</h1>
 
-        <x-form action='Criar'></x-form>
+        <x-form-addresses action='Criar'></x-form-addresses>
     </div>
 
     @if (false)

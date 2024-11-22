@@ -1,16 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-[80%] relative overflow-x-auto flex flex-col gap-4">
+    <div class="w-[90%] relative overflow-x-auto flex flex-col gap-4">
+
         <div class="flex full justify-between">
-            <h1 class="font-bold text-3xl">Lista de Usuários</h1>
-            <a type="button" href="{{ route('employees.create') }}"
+            <h1 class="font-bold text-3xl">Lista de Endereços</h1>
+            <a type="button" href="{{ route('addresses.create') }}"
                 class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Adicionar
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </a>
         </div>
@@ -19,20 +20,19 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Nome
+                        Rua
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Idade
+                        Número
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Salário
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Endereço
+                        Cep
                     </th>
                     <th>
-                        Meios de contato
+                        Estado
                     </th>
+                    <th>Complemento</th>
+                    <th>Pertence</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
@@ -40,45 +40,26 @@
             <tbody>
                 {{-- line --}}
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-
-                        <a href="{{ route('employees.show', ['employee' => '1234']) }}"
-                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10
-                            h-10 rounded-full"
-                                src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">Neil Sims</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>
-                        </a>
-                    </th>
                     <td class="px-6 py-4">
-                        20
+                        Maria Goreth Chavier
                     </td>
                     <td class="px-6 py-4">
-                        2500,00
+                        11
                     </td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('addresses.show', ['address' => null]) }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
-                            </svg>
-                        </a>
+                        59255000
                     </td>
                     <td class=" py-4">
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
-                            </svg>
-                        </a>
+                        RN
+                    </td>
+                    <td class="py-4">
+                        Bairro São Domingos
                     </td>
                     <td class=" py-4">
-                        <a href="{{ route('employees.edit', ['employee' => '1234']) }}">
+                        José
+                    </td>
+                    <td class=" py-4">
+                        <a href="{{ route('addresses.edit', ['address' => '1234']) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -87,7 +68,7 @@
                         </a>
                     </td>
                     <td class="py-4">
-                        <a href="{{ route('employees.destroy', ['employee' => '1234']) }}">
+                        <a href="{{ route('addresses.destroy', ['address' => '1234']) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"

@@ -10,12 +10,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    <x-header></x-header>
+<body class="flex flex-col min-h-full w-full">
+    <x-header height='10vh'></x-header>
 
 
     {{-- conteúdo principal --}}
-    <main>
+    <main class="h-[90vh] border flex flex-col items-center py-8 overflow-y-auto">
         @yield('content')
     </main>
 
