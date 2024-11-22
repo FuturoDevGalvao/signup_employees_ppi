@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employee.index', [
-            'title' => "Lista de funcionários"
+        return view('address.index', [
+            'title' => 'Lista de enderços'
         ]);
     }
 
@@ -25,8 +25,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view("employee.create", [
-            'title' => 'Criar novo funcionário'
+        return view('address.create', [
+            'title' => 'Criar novo endereço'
         ]);
     }
 
@@ -38,7 +38,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
@@ -49,7 +49,10 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('address.show', [
+            'title' => 'Visualizar Endereço',
+            'id' => $id
+        ]);
     }
 
     /**
@@ -60,10 +63,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        return view("employee.edit", [
-            'title' => 'Atualizar informações do funcionário',
-            'id' => $id
-        ]);
+        //
     }
 
     /**
@@ -86,6 +86,6 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
+        //
     }
 }
