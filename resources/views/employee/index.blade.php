@@ -3,7 +3,7 @@
 @section('content')
     <div class="w-[80%] relative overflow-x-auto flex flex-col gap-4">
         <div class="flex full justify-between">
-            <h1 class="font-bold text-3xl">Lista de Usuários</h1>
+            <h1 class="font-bold text-3xl">Lista de Funcionários</h1>
             <a type="button" href="{{ route('employees.create') }}"
                 class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Adicionar
@@ -60,7 +60,7 @@
                         2500,00
                     </td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('addresses.show', ['address' => null]) }}">
+                        <a href="{{ route('addresses.show', ['address' => 'null']) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"

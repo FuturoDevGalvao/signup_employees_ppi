@@ -51,7 +51,6 @@ class AddressController extends Controller
     {
         return view('address.show', [
             'title' => 'Visualizar Endereço',
-            'id' => $id
         ]);
     }
 
@@ -86,6 +85,8 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd(
+            $id
+        );
     }
 }

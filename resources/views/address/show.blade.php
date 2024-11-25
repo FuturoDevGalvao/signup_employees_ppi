@@ -2,8 +2,8 @@
 
 
 @section('content')
-    @if ($id !== 'null')
-        <h1>Mostrar endereço de id: {{ $id }}</h1>
+    @if (true)
+        <h1>Atualizar dados</h1>
     @else
         <div class="flex gap-4 flex-col">
             <h1 class="flex items-center gap-1 font-bold text-3xl">
@@ -15,10 +15,17 @@
                 </svg>
             </h1>
 
-            <a href="{{ redirect()->back() }}"
-                class="w-[200px] rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                voltar
-            </a>
+            <div class="flex justify-around">
+                <a href="{{ route('employees.index') }}"
+                    class="w-[200px] rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    voltar
+                </a>
+
+                <a href="{{ route('addresses.create') }}"
+                    class="w-[200px] rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Cadastrar um endereço
+                </a>
+            </div>
         </div>
     @endif
 @endsection
