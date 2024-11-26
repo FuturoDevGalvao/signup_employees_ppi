@@ -1,7 +1,8 @@
 @props(['width', 'action'])
 
 {{-- form de criação de novo funcionário --}}
-<form style="width: {{ $width ?? '100%' }};" class="" method="POST" action="{{ route('employees.store') }}">
+<form style="width: {{ $width ?? '100%' }};" class="flex flex-col gap-4" method="POST"
+    action="{{ route('addresses.store') }}">
     @csrf
 
     <div class="relative z-0 w-full mb-5 group">

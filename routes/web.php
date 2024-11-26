@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,5 @@ Route::get("/teste", function () {
 Route::resource('employees', EmployeeController::class);
 
 Route::resource('addresses', AddressController::class);
+
+Route::resource('images', ImageController::class);

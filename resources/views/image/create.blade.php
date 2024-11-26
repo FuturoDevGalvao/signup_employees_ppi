@@ -3,8 +3,7 @@
 
 @section('content')
     <div class="flex flex-col gap-4 w-[30%]">
-        <h1 class="font-bold text-3xl">Criar novo funcionário</h1>
-
+        <h1 class="font-bold text-3xl">Fazer upload de imagem</h1>
 
         @if ($showModal)
             @if ($sucess)
@@ -59,6 +58,6 @@
             @endif
         @endif
 
-        <x-form action='Criar'></x-form>
+        <x-form-image action='Criar'></x-form-image>
     </div>
 @endsection

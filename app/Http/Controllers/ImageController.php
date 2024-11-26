@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('employee.index', [
-            'title' => "Lista de funcionários",
-            'employees' => Employee::all(['id', 'name', 'age', 'email', 'wage']),
-            'sucess' => $request->session()->get('sucess'),
-            'showModal' => $request->session()->get('showModal'),
-            "employeeDestroied" => $request->session()->get('employee')
+        return view('image.index', [
+            'title' => 'Fotos de perfil',
         ]);
     }
 
@@ -30,8 +26,8 @@ class EmployeeController extends Controller
      */
     public function create(Request $request)
     {
-        return view("employee.create", [
-            'title' => 'Criar novo funcionário',
+        return view('image.create', [
+            'title' => 'Inserir nova foto de perfil',
             'sucess' => $request->session()->get('sucess'),
             'showModal' => $request->session()->get('showModal')
         ]);
@@ -45,16 +41,19 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employeeData = $request->only(['name', 'age', 'email', 'password', 'wage']);
+        $employeeData = ['employee_id' => $request->only('employee_id'), 'image' => $request->file('image')];
 
-        $sessionData = ['success' => false, 'showModal' => false];
+        dd($employeeData);
+
+        $sessionData = ['sucess' => false, 'showModal' => false];
 
         try {
-            Employee::create($employeeData);
-            $sessionData['success'] = $sessionData['showModal'] = true;
+            Image::create($employeeData);
+            $sessionData['sucess'] = $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         } catch (\Throwable $th) {
             dd($th);
+
             $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         }
@@ -79,10 +78,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        return view("employee.edit", [
-            'title' => 'Atualizar informações do funcionário',
-            'id' => $id
-        ]);
+        //
     }
 
     /**
@@ -105,18 +101,6 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $sessionData = ['success' => false, 'showModal' => false];
-
-        try {
-            $employee = Employee::findOrFail($id);
-            $sessionData['success'] = $sessionData['showModal'] = true;
-            $sessionData['employee'] = $employee;
-            $employee->delete();
-            return redirect()->back()->with($sessionData);
-        } catch (\Throwable $th) {
-            // dd($th);
-            $sessionData['showModal'] = true;
-            return redirect()->back()->with($sessionData);
-        }
+        //
     }
 }

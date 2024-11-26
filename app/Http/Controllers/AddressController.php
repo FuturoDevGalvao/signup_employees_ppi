@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -23,10 +24,12 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('address.create', [
-            'title' => 'Criar novo endereço'
+            'title' => 'Criar novo endereço',
+            'sucess' => $request->session()->get('sucess'),
+            'showModal' => $request->session()->get('showModal')
         ]);
     }
 
@@ -38,7 +41,20 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employeeData = $request->only(['road', 'number', 'cep', 'state', 'complement', 'employee_id']);
+
+        $sessionData = ['sucess' => false, 'showModal' => false];
+
+        try {
+            Address::create($employeeData);
+            $sessionData['sucess'] = $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 
     /**
