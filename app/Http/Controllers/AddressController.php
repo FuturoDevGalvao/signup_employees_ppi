@@ -15,7 +15,8 @@ class AddressController extends Controller
     public function index()
     {
         return view('address.index', [
-            'title' => 'Lista de enderços'
+            'title' => 'Lista de enderços',
+            'addresses' => Address::all(['id', 'road', 'number', 'cep', 'state', 'complement', 'employee_id']),
         ]);
     }
 
