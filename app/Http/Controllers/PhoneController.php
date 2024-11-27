@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address;
 use App\Models\Employee;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
-class AddressController extends Controller
+class PhoneController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('address.index', [
-            'title' => 'Lista de enderços',
-            'addresses' => Address::all(['id', 'road', 'number', 'cep', 'state', 'complement', 'employee_id']),
+        return view('phone.index', [
+            'title' => 'Lista de telefones',
+            'success' => $request->session()->get('success'),
+            'showModal' => $request->session()->get('showModal'),
         ]);
     }
 
@@ -28,9 +29,9 @@ class AddressController extends Controller
      */
     public function create(Request $request)
     {
-        return view('address.create', [
-            'title' => 'Criar novo endereço',
-            'sucess' => $request->session()->get('sucess'),
+        return view('phone.create', [
+            'title' => 'Novo telefone',
+            'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
             'employee' => Employee::find($request->query('employee'))
         ]);
@@ -44,17 +45,18 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        $employeeData = $request->only(['road', 'number', 'cep', 'state', 'complement', 'employee_id']);
+        dd($request);
 
-        $sessionData = ['sucess' => false, 'showModal' => false];
+        $phoneData = $request->only(['number', 'employee_id']);
+
+        $sessionData = ['success' => false, 'showModal' => false];
 
         try {
-            Address::create($employeeData);
-            $sessionData['sucess'] = $sessionData['showModal'] = true;
+            Phone::create($phoneData);
+            $sessionData['success'] = $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         } catch (\Throwable $th) {
             dd($th);
-
             $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         }
@@ -68,9 +70,7 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        return view('address.show', [
-            'title' => 'Visualizar Endereço',
-        ]);
+        //
     }
 
     /**
@@ -104,8 +104,6 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        dd(
-            $id
-        );
+        //
     }
 }

@@ -20,8 +20,14 @@ return new class extends Migration
             $table->string('cep');
             $table->string('state');
             $table->string('complement');
-            $table->foreignId('employee_id')->constrained();
+            $table->unsignedBigInteger('employee_id');
             $table->timestamps();
+
+            /* chaves estrangeiras */
+            $table->foreign('employee_id')
+                ->references('id')
+                ->on('employees')
+                ->onDelete('cascade'); // Excluir endereços automaticamente
         });
     }
 

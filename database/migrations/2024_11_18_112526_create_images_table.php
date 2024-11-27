@@ -16,8 +16,14 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('path');
-            $table->foreignId('employee_id')->constrained();
+            $table->unsignedBigInteger('employee_id');
             $table->timestamps();
+
+            /* chaves estrangeiras */
+            $table->foreign('employee_id')
+                ->references('id')
+                ->on('employees')
+                ->onDelete('cascade');
         });
     }
 

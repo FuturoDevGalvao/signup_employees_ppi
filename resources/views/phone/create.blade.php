@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
+
 @section('content')
-    <div class="flex flex-col gap-5 w-[30%]">
-        <div>
-            <h1 class="font-bold text-3xl">Editar informações</h1>
-            <p class="text-gray-600 text-sm">Editará as informações de <span
-                    class="font-semibold">{{ $employee->name }}</span></p>
+    <div class="flex flex-col gap-4 w-[30%]">
+
+        <div class="mb-2">
+            <h1 class="font-bold text-3xl">Cadastrar novo telefone</h1>
+            <p class="text-gray-500">Para: <span class="font-semibold">{{ $employee->name }}</span></p>
         </div>
+
         @if ($showModal)
-            @if ($success)
+            @if ($sucess)
                 <div id="alert-border-3"
                     class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
                     role="alert">
@@ -18,7 +20,9 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        As informações do <span class="font-semibold">funcionário</span> foram devidamente atualizadas!
+                        A simple success alert with an <a href="#"
+                            class="font-semibold underline hover:no-underline">example
+                            link</a>. Give it a click if you like.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -41,10 +45,9 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        <span class="font-semibold">Ocorreu um erro</span> ao tentar cadastrar o novo funcionário. Por
-                        favor,
-                        <span class="font-semibold">revise
-                            as informações cedidas</span>.
+                        A simple danger alert with an <a href="#"
+                            class="font-semibold underline hover:no-underline">example
+                            link</a>. Give it a click if you like.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -60,6 +63,6 @@
             @endif
         @endif
 
-        <x-form-employee action='Editar' :employee="$employee"></x-form-employee>
+        <x-form-phone action='Criar' :employee="$employee"></x-form-phone>
     </div>
 @endsection

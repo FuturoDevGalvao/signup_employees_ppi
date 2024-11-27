@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PhoneController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::resource('employees', EmployeeController::class);
 Route::resource('addresses', AddressController::class);
 
 Route::resource('images', ImageController::class);
+
+Route::resource('phones', PhoneController::class);

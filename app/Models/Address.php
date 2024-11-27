@@ -11,8 +11,8 @@ class Address extends Model
 
     protected $fillable = ['road', 'number', 'cep', 'state', 'complement', 'employee_id'];
 
-    public function user()
+    public function employee()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
     }
 }

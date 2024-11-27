@@ -17,7 +17,7 @@ class EmployeeController extends Controller
         return view('employee.index', [
             'title' => "Lista de funcionários",
             'employees' => Employee::all(['id', 'name', 'age', 'email', 'wage']),
-            'sucess' => $request->session()->get('sucess'),
+            'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
             "employeeDestroied" => $request->session()->get('employee')
         ]);
@@ -32,8 +32,8 @@ class EmployeeController extends Controller
     {
         return view("employee.create", [
             'title' => 'Criar novo funcionário',
-            'sucess' => $request->session()->get('sucess'),
-            'showModal' => $request->session()->get('showModal')
+            'success' => $request->session()->get('success'),
+            'showModal' => $request->session()->get('showModal'),
         ]);
     }
 
@@ -77,11 +77,13 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         return view("employee.edit", [
             'title' => 'Atualizar informações do funcionário',
-            'id' => $id
+            'employee' => Employee::find($id),
+            'success' => $request->session()->get('success'),
+            'showModal' => $request->session()->get('showModal')
         ]);
     }
 
@@ -94,7 +96,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request, $id);
     }
 
     /**
@@ -114,7 +116,7 @@ class EmployeeController extends Controller
             $employee->delete();
             return redirect()->back()->with($sessionData);
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         }

@@ -11,17 +11,17 @@ class Employee extends Model
 
     protected $fillable = ['name', 'age', 'email', 'password', 'wage'];
 
-    public function phone()
+    public function phones()
     {
         return $this->hasMany(Phone::class);
     }
 
-    public function image()
+    public function images()
     {
         return $this->hasMany(Image::class);
     }
 
-    public function address()
+    public function addresses()
     {
         return $this->hasMany(Address::class);
     }

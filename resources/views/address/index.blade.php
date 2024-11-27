@@ -3,17 +3,8 @@
 @section('content')
     <div class="w-[90%] relative overflow-x-auto flex flex-col gap-4">
 
-        <div class="flex full justify-between">
+        <div class="flex full">
             <h1 class="font-bold text-3xl">Lista de Endereços</h1>
-            <a type="button" href="{{ route('addresses.create') }}"
-                class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                Adicionar
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-            </a>
         </div>
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -57,7 +48,7 @@
                             {{ $address->complement }}
                         </td>
                         <td class=" py-4">
-                            {{ $address->employee_id }}
+                            {{ $address->employee->name }}
                         </td>
                         <td class=" py-4">
                             <a href="{{ route('addresses.edit', ['address' => '1234']) }}">
