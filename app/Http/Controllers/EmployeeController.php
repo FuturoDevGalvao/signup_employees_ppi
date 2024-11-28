@@ -68,7 +68,10 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('employee.show', [
+            'title' => 'Exibir funcionário',
+            'employee' => Employee::find($id)
+        ]);
     }
 
     /**
@@ -82,6 +85,7 @@ class EmployeeController extends Controller
         return view("employee.edit", [
             'title' => 'Atualizar informações do funcionário',
             'employee' => Employee::find($id),
+            'updatedEmployee' => $request->session()->get('updatedEmployee'),
             'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal')
         ]);
@@ -96,7 +100,21 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request, $id);
+        $newEmployeeData = $request->only(['name', 'age', 'wage', 'email', 'password']);
+
+        $sessionData = ['success' => false, 'showModal' => false, 'updatedEmployee' => null];
+
+        try {
+            $employee = Employee::findOrFail($id);
+            $employee->update($newEmployeeData);
+            $sessionData['updatedEmployee'] = $employee;
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 
     /**

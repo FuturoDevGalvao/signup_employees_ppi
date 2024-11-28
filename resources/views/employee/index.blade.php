@@ -5,7 +5,7 @@
         <div class="flex full justify-between items-center">
             <h1 class="font-bold text-3xl">Lista de Funcionários</h1>
             <a type="button" href="{{ route('employees.create') }}"
-                class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 Adicionar
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
@@ -27,7 +27,8 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        O funcionário <span class="font-semibold">{{ $employeeDestroied->name }}</span> foi devidamente
+                        O funcionário <span class="font-semibold">{{ $employeeDestroied->name ?? '' }}</span> foi
+                        devidamente
                         excluído.
                     </div>
                     <button type="button"
@@ -101,10 +102,7 @@
 
                             <a href="{{ route('employees.show', ['employee' => $employee->id]) }}"
                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                <img class="w-10
-                            h-10 rounded-full"
-                                    src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
-                                <div class="ps-3">
+                                <div class="ps-3 hover:text-blue-600 transition-all">
                                     <div class="text-base font-semibold">{{ $employee->name }}</div>
                                     <div class="font-normal text-gray-500">{{ $employee->email }}</div>
                                 </div>
@@ -157,7 +155,8 @@
                             </a>
                         </td>
                         <td scope="row" class="px-6 py-4">
-                            <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}">
+                            <a href="{{ route('employees.edit', ['employee' => $employee->id]) }}"
+                                class="inline-flex items-center justify-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"

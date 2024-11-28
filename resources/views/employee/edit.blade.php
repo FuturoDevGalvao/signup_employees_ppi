@@ -18,7 +18,9 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        As informações do <span class="font-semibold">funcionário</span> foram devidamente atualizadas!
+                        As informações do funcionário(a) <span
+                            class="font-semibold">{{ $updatedEmployee ? $updatedEmployee->name : 'funcionário' }}</span>
+                        foram devidamente atualizadas!
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -41,10 +43,10 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        <span class="font-semibold">Ocorreu um erro</span> ao tentar cadastrar o novo funcionário. Por
-                        favor,
-                        <span class="font-semibold">revise
-                            as informações cedidas</span>.
+                        <span class="font-semibold">Ocorreu um erro</span> ao tentar atualizar as informações do
+                        funcionário(a) <span
+                            class="font-semibold">{{ $updatedEmployee ? $updatedEmployee->name : 'funcionário' }}</span>.
+                        Por favor, <span class="font-semibold">revise as informações cedidas</span>.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"

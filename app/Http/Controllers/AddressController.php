@@ -13,11 +13,14 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('address.index', [
             'title' => 'Lista de enderços',
             'addresses' => Address::all(['id', 'road', 'number', 'cep', 'state', 'complement', 'employee_id']),
+            'employeeOwnerDeletedAddress' => $request->session()->get('employeeOwnerDeletedAddress'),
+            'success' => $request->session()->get('success'),
+            'showModal' => $request->session()->get('showModal'),
         ]);
     }
 
@@ -30,7 +33,7 @@ class AddressController extends Controller
     {
         return view('address.create', [
             'title' => 'Criar novo endereço',
-            'sucess' => $request->session()->get('sucess'),
+            'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
             'employee' => Employee::find($request->query('employee'))
         ]);
@@ -46,11 +49,11 @@ class AddressController extends Controller
     {
         $employeeData = $request->only(['road', 'number', 'cep', 'state', 'complement', 'employee_id']);
 
-        $sessionData = ['sucess' => false, 'showModal' => false];
+        $sessionData = ['success' => false, 'showModal' => false];
 
         try {
             Address::create($employeeData);
-            $sessionData['sucess'] = $sessionData['showModal'] = true;
+            $sessionData['success'] = $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         } catch (\Throwable $th) {
             dd($th);
@@ -79,9 +82,17 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $address = Address::find($id);
+
+        return view('address.edit', [
+            'title' => 'Editar endereço',
+            'address' => $address,
+            'employee' => $address->employee,
+            'success' => $request->session()->get('success'),
+            'showModal' => $request->session()->get('showModal'),
+        ]);
     }
 
     /**
@@ -93,7 +104,20 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $newAddressData = $request->only(['road', 'number', 'cep', 'state', 'complement', 'employee_id']);
+
+        $sessionData = ['success' => false, 'showModal' => false];
+
+        try {
+            $address = Address::findOrFail($id);
+            $address->update($newAddressData);
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 
     /**
@@ -104,8 +128,18 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        dd(
-            $id
-        );
+        $sessionData = ['success' => false, 'showModal' => false];
+
+        try {
+            $address = Address::findOrFail($id);
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            $sessionData['employeeOwnerDeletedAddress'] = $address->employee;
+            $address->delete();
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 }

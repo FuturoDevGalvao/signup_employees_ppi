@@ -1,12 +1,50 @@
-@props(['width', 'action', 'employee' => null])
+@props(['width', 'action', 'employee' => null, 'address' => null])
+
+@php
+    $paramsForRequest = [
+        'action' => $action == 'Criar' ? 'addresses.store' : 'addresses.update',
+        'method' => $action == 'Criar' ? 'POST' : 'PUT',
+    ];
+
+    $states = [
+        'AC' => 'Acre',
+        'AL' => 'Alagoas',
+        'AP' => 'Amapá',
+        'AM' => 'Amazonas',
+        'BA' => 'Bahia',
+        'CE' => 'Ceará',
+        'DF' => 'Distrito Federal',
+        'ES' => 'Espírito Santo',
+        'GO' => 'Goiás',
+        'MA' => 'Maranhão',
+        'MT' => 'Mato Grosso',
+        'MS' => 'Mato Grosso do Sul',
+        'MG' => 'Minas Gerais',
+        'PA' => 'Pará',
+        'PB' => 'Paraíba',
+        'PR' => 'Paraná',
+        'PE' => 'Pernambuco',
+        'PI' => 'Piauí',
+        'RJ' => 'Rio de Janeiro',
+        'RN' => 'Rio Grande do Norte',
+        'RS' => 'Rio Grande do Sul',
+        'RO' => 'Rondônia',
+        'RR' => 'Roraima',
+        'SC' => 'Santa Catarina',
+        'SP' => 'São Paulo',
+        'SE' => 'Sergipe',
+        'TO' => 'Tocantins',
+    ];
+@endphp
 
 {{-- form de criação de novo funcionário --}}
 <form style="width: {{ $width ?? '100%' }};" class="flex flex-col gap-4 bg-slate-50/50 rounded-xl border p-10"
-    method="POST" action="{{ route('addresses.store') }}">
+    method="POST" action="{{ route($paramsForRequest['action'], $address) }}">
     @csrf
+    @method($paramsForRequest['method'])
 
     <div class="relative z-0 w-full mb-5 group">
-        <input type="text" name="road" id="floating_road"
+        <input type="text" name="road" id="floating_road" value="{{ $address ? $address->road : '' }}"
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" " required />
         <label for="floating_road"
@@ -14,7 +52,7 @@
     </div>
 
     <div class="relative z-0 w-full mb-5 group">
-        <input type="text" name="number" id="floating_number"
+        <input type="text" name="number" id="floating_number" value="{{ $address ? $address->number : '' }}"
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" " required />
         <label for="floating_number"
@@ -22,7 +60,7 @@
     </div>
 
     <div class="relative z-0 w-full mb-5 group">
-        <input type="text" name="cep" id="floating_cep"
+        <input type="text" name="cep" id="floating_cep" value="{{ $address ? $address->cep : '' }}"
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" " required />
         <label for="floating_cep"
@@ -33,38 +71,17 @@
         <label for="states" class="block mb-2 text-sm text-gray-500 dark:text-white">Estado</label>
         <select id="states" name="state"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>Selecione o estado</option>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
+            <option>Selecione o estado</option>
+            @foreach ($states as $key => $state)
+                <option value="{{ $key }}" {{ $address && $address->state == $key ? 'selected' : '' }}>
+                    {{ $state }}
+                </option>
+            @endforeach
         </select>
     </div>
     <div class="relative z-0 w-full mb-5 group">
         <input type="text" name="complement" id="floating_complement"
+            value="{{ $address ? $address->complement : '' }}"
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" " required />
         <label for="floating_complement"

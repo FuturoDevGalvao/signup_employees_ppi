@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
-
 @section('content')
-    <div class="flex flex-col gap-4 w-[30%]">
-        <div class="">
-            <h1 class="font-bold text-3xl">Cadastrar Novo Endereço</h1>
-            <p class="text-gray-500">
-                Para: <span class="font-semibold">{{ $employee->name }}</span>
-            </p>
+    <div class="flex flex-col gap-5 w-[30%]">
+        <div>
+            <h1 class="font-bold text-3xl">Editar informações</h1>
+            <p class="text-gray-600 text-sm">Editará as informações do endereço pertencente a <span
+                    class="font-semibold">{{ $address->employee->name }}</span></p>
         </div>
-
         @if ($showModal)
             @if ($success)
                 <div id="alert-border-3"
@@ -21,9 +18,7 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        A simple success alert with an <a href="#"
-                            class="font-semibold underline hover:no-underline">example
-                            link</a>. Give it a click if you like.
+                        O endereço foi devidamente atualizado!
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -46,9 +41,8 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        A simple danger alert with an <a href="#"
-                            class="font-semibold underline hover:no-underline">example
-                            link</a>. Give it a click if you like.
+                        <span class="font-semibold">Ocorreu um erro</span> ao tentar atualizar as informações do
+                        endereço. Por favor, <span class="font-semibold">revise as informações cedidas</span>.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -64,6 +58,6 @@
             @endif
         @endif
 
-        <x-form-addresses action='Criar' :employee="$employee"></x-form-addresses>
+        <x-form-addresses action='Editar' :address="$address" :employee="$employee"></x-form-addresses>
     </div>
 @endsection
