@@ -10,7 +10,7 @@
         </div>
 
         @if ($showModal)
-            @if ($sucess)
+            @if ($success)
                 <div id="alert-border-3"
                     class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
                     role="alert">
@@ -20,9 +20,8 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        A simple success alert with an <a href="#"
-                            class="font-semibold underline hover:no-underline">example
-                            link</a>. Give it a click if you like.
+                        Um novo telefone para <span class="font-semibold">{{ $employee->name }}</span> foi devidamente
+                        cadastrado!
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -45,9 +44,8 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        A simple danger alert with an <a href="#"
-                            class="font-semibold underline hover:no-underline">example
-                            link</a>. Give it a click if you like.
+                        <span class="font-semibold">Ocorreu um erro</span> ao tentar cadastrar o novo endereço. Por
+                        favor, <span class="font-semibold">revise as informações cedidas</span>.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"

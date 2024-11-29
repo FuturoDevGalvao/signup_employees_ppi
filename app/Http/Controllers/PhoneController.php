@@ -17,6 +17,7 @@ class PhoneController extends Controller
     {
         return view('phone.index', [
             'title' => 'Lista de telefones',
+            'phones' => Phone::all(['id', 'number', 'employee_id']),
             'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
         ]);
@@ -45,8 +46,6 @@ class PhoneController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-
         $phoneData = $request->only(['number', 'employee_id']);
 
         $sessionData = ['success' => false, 'showModal' => false];
@@ -79,9 +78,17 @@ class PhoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $phone = Phone::find($id);
+
+        return view('phone.edit', [
+            'title' => 'Editar ',
+            'phone' => $phone,
+            'employee' => $phone->employee,
+            'success' => $request->session()->get('success'),
+            'showModal' => $request->session()->get('showModal'),
+        ]);
     }
 
     /**

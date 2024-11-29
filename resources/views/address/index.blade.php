@@ -174,7 +174,6 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
                         </td>
                     </tr>
                 @empty
