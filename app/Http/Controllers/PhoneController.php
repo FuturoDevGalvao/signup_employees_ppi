@@ -83,11 +83,11 @@ class PhoneController extends Controller
         $phone = Phone::find($id);
 
         return view('phone.edit', [
-            'title' => 'Editar ',
+            'title' => 'Editar telefone',
             'phone' => $phone,
-            'employee' => $phone->employee,
             'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
+            'updatedEmployee' => null
         ]);
     }
 
@@ -100,7 +100,21 @@ class PhoneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $newPhoneData = $request->only(['number', 'employee_id']);
+
+        $sessionData = ['success' => false, 'showModal' => false, 'updatedEmployee' => null];
+
+        try {
+            $phone = Phone::findOrFail($id);
+            $phone->update($newPhoneData);
+            $sessionData['updatedEmployee'] = $phone->employee;
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 
     /**

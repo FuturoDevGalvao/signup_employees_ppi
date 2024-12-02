@@ -9,7 +9,7 @@
 
 {{-- form de criação/atualização de um telefone --}}
 <form style="width: {{ $width ?? '100%' }};" class="flex flex-col gap-4" method="POST" method="POST"
-    action="{{ route($paramsForRequest['action'], $address) }}">
+    action="{{ route($paramsForRequest['action'], $phone) }}">
     @csrf
     @method($paramsForRequest['method'])
 
@@ -27,7 +27,7 @@
 
     <div class="hidden relative z-0 w-full mb-5 group">
         <input type="text" name="employee_id" id="floating_employee_id"
-            value="{{ old('employee_id', $employee ? $employee->id : '') }}"
+            value="{{ old('employee_id', $phone ? $phone->employee->id : '') }}"
             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" " required readonly />
 

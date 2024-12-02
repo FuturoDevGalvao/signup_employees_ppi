@@ -1,5 +1,5 @@
 @extends('layouts.app')
-q32
+
 @section('content')
     <div class="flex flex-col gap-5 w-[30%]">
         <div>
@@ -58,6 +58,6 @@ q32
             @endif
         @endif
 
-        <x-form-phone action='Editar' :employee="$employee" :phone="$phone"></x-form-phone>
+        <x-form-phone action='Editar' :phone="$phone"></x-form-phone>
     </div>
 @endsection
