@@ -17,9 +17,10 @@ class ImageController extends Controller
     {
         return view('image.index', [
             'title' => 'Fotos de perfil',
-            'success' => $request->session()->get('sucess'),
+            'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
             'images' => Image::all(['id', 'path', 'employee_id']),
+            'employeeOwnerDeletedImage' => $request->session()->get('employeeOwnerDeletedImage')
         ]);
     }
 
@@ -32,7 +33,7 @@ class ImageController extends Controller
     {
         return view('image.create', [
             'title' => 'Inserir nova foto de perfil',
-            'success' => $request->session()->get('sucess'),
+            'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
             'employee' => Employee::find($request->query('employee'))
         ]);
@@ -46,21 +47,20 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $imageData = $request->only('employee_id');
 
-        $employeeData = ['employee_id' => $request->only('employee_id'), 'image' => $request->file('image')];
+        if ($request->hasFile('image')) {
+            $imageData['path'] = Image::saveImage($request->file('image'));
+        }
 
-        dd($employeeData);
-
-        $sessionData = ['sucess' => false, 'showModal' => false];
+        $sessionData = ['success' => false, 'showModal' => false];
 
         try {
-            Image::create($employeeData);
-            $sessionData['sucess'] = $sessionData['showModal'] = true;
+            Image::create($imageData);
+            $sessionData['success'] = $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         } catch (\Throwable $th) {
             dd($th);
-
             $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         }
@@ -74,7 +74,12 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('image.show', [
+            'title' => 'Visualizar Imagens',
+            'employee' => Employee::find($id),
+            'success' => session()->get('success'),
+            'showModal' => session()->get('showModal'),
+        ]);
     }
 
     /**
@@ -85,7 +90,14 @@ class ImageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $image = Image::find($id);
+
+        return view('image.edit', [
+            'title' => 'Editar Imagem',
+            'image' => $image,
+            'success' => session()->get('success'),
+            'showModal' => session()->get('showModal'),
+        ]);
     }
 
     /**
@@ -97,7 +109,24 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $imageData = $request->only('employee_id');
+
+        if ($request->hasFile('image')) {
+            $imageData['path'] = Image::saveImage($request->file('image'));
+        }
+
+        $sessionData = ['success' => false, 'showModal' => false];
+
+        try {
+            $image = Image::findOrFail($id);
+            $image->update($imageData);
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 
     /**
@@ -108,6 +137,19 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sessionData = ['success' => false, 'showModal' => false];
+
+        try {
+            $image = Image::findOrFail($id);
+            Image::deleteFileOnDeleteRegister($image->path);
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            $sessionData['employeeOwnerDeletedImage'] = $image->employee;
+            $image->delete();
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 }

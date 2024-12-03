@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="w-[80%] relative overflow-x-auto flex flex-col gap-4">
-        <div class="flex full justify-between">
-            <h1 class="font-bold text-3xl">Lista de Fotos de Perfil</h1>
+
+        <div class="mb-2">
+            <h1 class="font-bold text-3xl">Telefones Associados</h1>
+            <p class="text-gray-500">Pertencentes a: <span class="font-semibold">{{ $employee->name }}</span></p>
         </div>
 
         {{-- Modal --}}
@@ -12,15 +14,13 @@
                 <div id="alert-border-3"
                     class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
                     role="alert">
-                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                        viewBox="0 0 20 20">
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        A imagem pertencente a <span class="font-semibold">{{ $employeeOwnerDeletedImage->name }}</span>
-                        foi devidamente
-                        excluída.
+                        O telefone foi devidamente excluído.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -63,33 +63,23 @@
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Imagem</th>
                     <th scope="col" class="px-6 py-3">
-                        Caminho da Imagem
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Pertence
+                        Número
                     </th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($images as $image)
+                @forelse ($employee->phones as $phone)
+                    {{-- line --}}
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
-                            <img class="object-cover w-16 h-16 rounded-full" src="{{ asset('storage/' . $image->path) }}"
-                                alt="foto" width="20px">
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $image->path }}
+                            {{ $phone->number }}
                         </td>
                         <td class=" py-4">
-                            {{ $image->employee->name }}
-                        </td>
-                        <td class=" py-4">
-                            <a href="{{ route('images.edit', ['image' => $image->id]) }}"
+                            <a href="{{ route('phones.edit', ['phone' => $phone->id]) }}"
                                 class="inline-flex items-center justify-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -99,8 +89,8 @@
                             </a>
                         </td>
                         <td class="py-4">
-                            <button data-modal-target="popup-modal-{{ $image->id }}"
-                                data-modal-toggle="popup-modal-{{ $image->id }}"
+                            <button data-modal-target="popup-modal-{{ $phone->id }}"
+                                data-modal-toggle="popup-modal-{{ $phone->id }}"
                                 class="flex items-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                 type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -110,18 +100,17 @@
                                 </svg>
                             </button>
 
-                            <div id="popup-modal-{{ $image->id }}" tabindex="-1"
+                            <div id="popup-modal-{{ $phone->id }}" tabindex="-1"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative p-4 w-full max-w-md max-h-full">
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <button type="button"
                                             class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                            data-modal-hide="popup-modal-{{ $image->id }}">
+                                            data-modal-hide="popup-modal-{{ $phone->id }}">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                             </svg>
                                             <span class="sr-only">Close modal</span>
                                         </button>
@@ -134,10 +123,10 @@
                                                     d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                             </svg>
                                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                Deseja excluir a imagem pertencente a <span
-                                                    class="font-semibold">{{ $image->employee->name }}</span>?</h3>
+                                                Deseja excluir o telefone pertencente a <span
+                                                    class="font-semibold">{{ $phone->employee->name }}</span>?</h3>
                                             <div class="flex gap-1 items-center justify-center">
-                                                <form action="{{ route('images.destroy', ['image' => $image->id]) }}"
+                                                <form action="{{ route('phones.destroy', ['phone' => $phone->id]) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -147,7 +136,7 @@
                                                     </button>
                                                 </form>
 
-                                                <button data-modal-hide="popup-modal-{{ $image->id }}" type="button"
+                                                <button data-modal-hide="popup-modal-{{ $phone->id }}" type="button"
                                                     class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Não,
                                                     mudei de ideia</button>
 
@@ -158,12 +147,25 @@
                             </div>
                         </td>
                     </tr>
+                    {{-- end line --}}
+
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center p-4">
-                            <h1>Nenhuma imagem registrada</h1>
+                        <td colspan="4" class="text-center p-4">
+                            <h1>Nenhum telefone associado</h1>
                         </td>
                     </tr>
+                    <div class="flex gap-4 items-center">
+                        <a href="{{ route('employees.index') }}"
+                            class="rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            voltar
+                        </a>
+
+                        <a href="{{ route('phones.create', ['employee' => $employee]) }}"
+                            class="rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Cadastrar um telefone para {{ $employee->name }}
+                        </a>
+                    </div>
                 @endforelse
             </tbody>
         </table>

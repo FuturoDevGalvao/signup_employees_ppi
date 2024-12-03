@@ -70,7 +70,12 @@ class PhoneController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('phone.show', [
+            'title' => 'Visualizar Telefones',
+            'employee' => Employee::find($id),
+            'success' => session()->get('success'),
+            'showModal' => session()->get('showModal'),
+        ]);
     }
 
     /**

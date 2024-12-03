@@ -118,7 +118,7 @@
                             {{ $employee->wage }}
                         </td>
                         <td scope="row" class="px-6 py-4">
-                            <a href="{{ route('addresses.show', ['address' => $employee->addresses()->id ?? 'null']) }}"
+                            <a href="{{ route('addresses.show', ['address' => $employee]) }}"
                                 class=" mb-1 flex items-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 associado(s)
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -138,7 +138,7 @@
                             </a>
                         </td>
                         <td scope="row" class="px-6 py-4">
-                            <a href="{{ route('phones.show', ['phone' => $employee->phones()->id ?? 'null']) }}"
+                            <a href="{{ route('phones.show', ['phone' => $employee]) }}"
                                 class="mb-1 flex items-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 associado(s)
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -158,7 +158,7 @@
                             </a>
                         </td>
                         <td scope="row" class="px-6 py-4">
-                            <a href="{{ route('images.show', ['image' => $employee->images()->id ?? 'null']) }}"
+                            <a href="{{ route('images.show', ['image' => $employee]) }}"
                                 class="mb-1 flex items-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 associado(s)
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -73,6 +73,9 @@ class AddressController extends Controller
     {
         return view('address.show', [
             'title' => 'Visualizar Endereço',
+            'employee' => Employee::find($id),
+            'success' => session()->get('success'),
+            'showModal' => session()->get('showModal'),
         ]);
     }
 

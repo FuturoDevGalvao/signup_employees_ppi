@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="w-[80%] relative overflow-x-auto flex flex-col gap-4">
-        <div class="flex full justify-between">
-            <h1 class="font-bold text-3xl">Lista de Fotos de Perfil</h1>
+
+        <div class="mb-2">
+            <h1 class="font-bold text-3xl">Fotos de Perfil Associadas</h1>
+            <p class="text-gray-500">Pertencentes a: <span class="font-semibold">{{ $employee->name }}</span></p>
         </div>
 
         {{-- Modal --}}
@@ -12,15 +14,13 @@
                 <div id="alert-border-3"
                     class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
                     role="alert">
-                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                        viewBox="0 0 20 20">
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <div class="ms-3 text-sm font-medium">
-                        A imagem pertencente a <span class="font-semibold">{{ $employeeOwnerDeletedImage->name }}</span>
-                        foi devidamente
-                        excluída.
+                        A imagem foi devidamente excluída.
                     </div>
                     <button type="button"
                         class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -67,15 +67,12 @@
                     <th scope="col" class="px-6 py-3">
                         Caminho da Imagem
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Pertence
-                    </th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($images as $image)
+                @forelse ($employee->images as $image)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-6 py-4">
@@ -84,9 +81,6 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ $image->path }}
-                        </td>
-                        <td class=" py-4">
-                            {{ $image->employee->name }}
                         </td>
                         <td class=" py-4">
                             <a href="{{ route('images.edit', ['image' => $image->id]) }}"
@@ -161,9 +155,20 @@
                 @empty
                     <tr>
                         <td colspan="7" class="text-center p-4">
-                            <h1>Nenhuma imagem registrada</h1>
+                            <h1>Nenhuma imagem associadas</h1>
                         </td>
                     </tr>
+                    <div class="flex gap-4 items-center">
+                        <a href="{{ route('employees.index') }}"
+                            class="rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            voltar
+                        </a>
+
+                        <a href="{{ route('images.create', ['employee' => $employee]) }}"
+                            class="rounded-full inline-flex items-center justify-center font-semibold text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Fazer upload de uma imagem para {{ $employee->name }}
+                        </a>
+                    </div>
                 @endforelse
             </tbody>
         </table>
