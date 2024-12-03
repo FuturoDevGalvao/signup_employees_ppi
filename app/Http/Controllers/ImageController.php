@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,13 @@ class ImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('image.index', [
             'title' => 'Fotos de perfil',
+            'success' => $request->session()->get('sucess'),
+            'showModal' => $request->session()->get('showModal'),
+            'images' => Image::all(['id', 'path', 'employee_id']),
         ]);
     }
 
@@ -28,8 +32,9 @@ class ImageController extends Controller
     {
         return view('image.create', [
             'title' => 'Inserir nova foto de perfil',
-            'sucess' => $request->session()->get('sucess'),
-            'showModal' => $request->session()->get('showModal')
+            'success' => $request->session()->get('sucess'),
+            'showModal' => $request->session()->get('showModal'),
+            'employee' => Employee::find($request->query('employee'))
         ]);
     }
 
@@ -41,6 +46,8 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
+
         $employeeData = ['employee_id' => $request->only('employee_id'), 'image' => $request->file('image')];
 
         dd($employeeData);

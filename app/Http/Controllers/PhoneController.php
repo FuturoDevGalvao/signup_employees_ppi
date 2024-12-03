@@ -18,6 +18,7 @@ class PhoneController extends Controller
         return view('phone.index', [
             'title' => 'Lista de telefones',
             'phones' => Phone::all(['id', 'number', 'employee_id']),
+            'employeeOwnerDeletedPhone' => $request->session()->get('employeeOwnerDeletedPhone'),
             'success' => $request->session()->get('success'),
             'showModal' => $request->session()->get('showModal'),
         ]);
@@ -107,7 +108,6 @@ class PhoneController extends Controller
         try {
             $phone = Phone::findOrFail($id);
             $phone->update($newPhoneData);
-            $sessionData['updatedEmployee'] = $phone->employee;
             $sessionData['success'] = $sessionData['showModal'] = true;
             return redirect()->back()->with($sessionData);
         } catch (\Throwable $th) {
@@ -125,6 +125,18 @@ class PhoneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sessionData = ['success' => false, 'showModal' => false];
+
+        try {
+            $phone = Phone::findOrFail($id);
+            $sessionData['success'] = $sessionData['showModal'] = true;
+            $sessionData['employeeOwnerDeletedPhone'] = $phone->employee;
+            $phone->delete();
+            return redirect()->back()->with($sessionData);
+        } catch (\Throwable $th) {
+            dd($th);
+            $sessionData['showModal'] = true;
+            return redirect()->back()->with($sessionData);
+        }
     }
 }
