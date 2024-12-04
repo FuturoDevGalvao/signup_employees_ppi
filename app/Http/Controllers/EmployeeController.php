@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -129,6 +131,7 @@ class EmployeeController extends Controller
 
         try {
             $employee = Employee::findOrFail($id);
+            $employee->images->each(fn($image) => Image::deleteFileImageOnDeleteRegister($image->path));
             $sessionData['success'] = $sessionData['showModal'] = true;
             $sessionData['employee'] = $employee;
             $employee->delete();

@@ -178,7 +178,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center p-4">
+                        <td colspan="8" class="text-center p-4">
                             <h1>Nenhum endereço registrado</h1>
                         </td>
                     </tr>

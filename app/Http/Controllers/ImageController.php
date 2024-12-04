@@ -141,7 +141,7 @@ class ImageController extends Controller
 
         try {
             $image = Image::findOrFail($id);
-            Image::deleteFileOnDeleteRegister($image->path);
+            Image::deleteFileImageOnDeleteRegister($image->path);
             $sessionData['success'] = $sessionData['showModal'] = true;
             $sessionData['employeeOwnerDeletedImage'] = $image->employee;
             $image->delete();

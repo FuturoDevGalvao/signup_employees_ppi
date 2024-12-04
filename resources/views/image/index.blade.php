@@ -160,7 +160,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center p-4">
+                        <td colspan="5" class="text-center p-4">
                             <h1>Nenhuma imagem registrada</h1>
                         </td>
                     </tr>

@@ -19,7 +19,7 @@ class Image extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public static function deleteFileOnDeleteRegister(string $path)
+    public static function deleteFileImageOnDeleteRegister(string $path)
     {
         if (Storage::disk('public')->exists($path)) {
             return Storage::disk('public')->delete($path);

@@ -160,7 +160,7 @@
                         <td scope="row" class="px-6 py-4">
                             <a href="{{ route('images.show', ['image' => $employee]) }}"
                                 class="mb-1 flex items-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                associado(s)
+                                associada(s)
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -169,7 +169,7 @@
                             </a>
                             <a href="{{ route('images.create', ['employee' => $employee->id]) }}"
                                 class="flex items-center gap-1 py-1 px-1.5 text-sm font-medium focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                novo
+                                nova
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -251,7 +251,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center p-4">
+                        <td colspan="8" class="text-center p-4">
                             <h1>Nenhum funcionário registrado</h1>
                         </td>
                     </tr>
